@@ -24,7 +24,6 @@ Development
 Install dependencies and start the dev server:
 
 ```bash
-cd frontend
 npm ci
 npm start
 ```
