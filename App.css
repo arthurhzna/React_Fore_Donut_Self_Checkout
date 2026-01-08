@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    background: #f1f5f9;
+  }
+  
+  .app {
+    display: flex;
+    height: 100vh;
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .left-panel {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+  }
+  
+  .viewer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+   
+  }
+  
+  .right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0; 
+  }
+  .right-top {
+    flex: 1;
+    display: flex;
+    min-height: 0; 
+  }
+  
+  .counts {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; 
+  }
+  
+  .right-bottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn {
+    flex: 1;
+    border: none;
+    border-radius: 20px;
+    font-size: 3vw;
+    font-weight: 700;
+    cursor: pointer;
+    min-height: 2rem;
+    padding: 2rem;
+  }
+  
+  .btn.next {
+    background: linear-gradient(160deg, #3b82f6, #2563eb);
+    color: white;
+  }
+  
+  .btn.stop {
+    background: linear-gradient(160deg, #ef4444, #dc2626);
+    color: white;
+  }
+  
+/* large SweetAlert2 confirm button */
+.swal-confirm-btn-large {
+  padding: 20px 60px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+/* optional: hover effect */
+.swal-confirm-btn-large:hover {
+  background-color: #2563eb;
+}
+
+.swal-confirm-btn-large {
+  padding: 20px 60px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.swal-confirm-btn-large:hover {
+  background-color: #2563eb;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
