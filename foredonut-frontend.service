@@ -8,7 +8,7 @@ PartOf=foredonut-backend.service
 [Service]
 Type=simple
 User=user
-WorkingDirectory=/home/user/Downloads/Fore_Donut/frontend
+WorkingDirectory=/home/user/Downloads/fore_donut/frontend
 
 ExecStartPre=/bin/bash -c '\
   until curl -sf http://127.0.0.1:8000/; do \
