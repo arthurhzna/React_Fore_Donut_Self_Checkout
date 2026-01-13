@@ -1,7 +1,7 @@
 [Unit]
-Description=Fore Donut Kiosk Browser
-After=graphical.target fore_donut_frontend.service
-Wants=graphical.target fore_donut_frontend.service
+Description=Fore Donut Kiosk 
+After=graphical.target foredonut-frontend.service
+Wants=graphical.target foredonut-frontend.service
 
 [Service]
 Type=simple
