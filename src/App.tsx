@@ -49,7 +49,7 @@ function App() {
       if (data.alert) {
         Swal.fire({
           title: "Alert!",
-          text: "Donut is Laying Down",
+          text: "Donut Is Laying Down",
           icon: "error",
           showConfirmButton: true,
           confirmButtonText: "OK",
@@ -87,7 +87,7 @@ function App() {
 
     Swal.fire({
       title: "Checkout!",
-      text: "Continue to Payment",
+      text: "Continue To Payment",
       icon: "success",
       showConfirmButton: true,
       confirmButtonText: "OK",
@@ -103,7 +103,7 @@ function App() {
 
     Swal.fire({
       title: "Reset!",
-      text: "List has been cleared",
+      text: "List Has Been Cleared",
       icon: "success",
       showConfirmButton: true,
       confirmButtonText: "OK",
