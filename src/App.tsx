@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { DonutTray } from "./types";
-import { getTrayList } from "./services/apiComvis";
+import { getTrayList, sendCheckout } from "./services/apiComvis";
 import "./App.css";
 
 import {
@@ -19,6 +19,7 @@ function App() {
   const [frame, setFrame] = useState<string | null>(null);
   const [trayList, setTrayList] = useState<DonutTray[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:8000/ws");
@@ -82,20 +83,39 @@ function App() {
     }
   };
 
-  const handleStop = () => {
-    setTrayList([]);
-
-    Swal.fire({
-      title: "Checkout!",
-      text: "Continue To Payment",
-      icon: "success",
-      showConfirmButton: true,
-      confirmButtonText: "OK",
-      buttonsStyling: false,
-      customClass: {
-        confirmButton: "swal-confirm-btn-large",
-      },
-    });
+  const handleStop = async () => {  
+    setIsCheckingOut(true);  
+    try {
+      await sendCheckout(trayList);
+      setTrayList([]);
+  
+      Swal.fire({
+        title: "Checkout!",
+        text: "Continue To Payment",
+        icon: "success",
+        showConfirmButton: true,
+        confirmButtonText: "OK",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "swal-confirm-btn-large",
+        },
+      });
+    } catch (err) {
+      console.error("Checkout failed", err);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to send checkout data",
+        icon: "error",
+        showConfirmButton: true,
+        confirmButtonText: "OK",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "swal-confirm-btn-large",
+        },
+      });
+    } finally {
+      setIsCheckingOut(false);  
+    }
   };
 
   const handleReset = () => {
@@ -184,7 +204,7 @@ function App() {
                   <TableRow>
                     <TableCell style={{ padding: 20 }}>Label</TableCell>
                     <TableCell style={{ padding: 20 }} align="right">
-                      Quantity
+                      Quantity: {trayList.length}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -238,11 +258,18 @@ function App() {
           <button
             className="btn stop"
             onClick={handleStop}
-            disabled={trayList.length === 0}
-            aria-disabled={trayList.length === 0}
+            disabled={trayList.length === 0 || isCheckingOut}
+            aria-disabled={trayList.length === 0 || isCheckingOut}
             style={{ flex: "1", minHeight: "45%" }}
           >
-            Checkout
+            {isCheckingOut ? (
+              <span className="spinner-container">
+                <span className="spinner"></span>
+                <span style={{ marginLeft: "10px" }}>Processing...</span>
+              </span>
+            ) : (
+              "Checkout"
+            )}
           </button>
         </div>
       </div>
